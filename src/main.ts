@@ -53,7 +53,7 @@ interface INodeSlave{
     masterToken: string
 };
 
-const nodeSlaves = (nodeMaster: object,userData: object,companyName: string,slaveType: string) => {
+const nodeSlaves = (nodeMaster: INodeMaster,userData: INodeSlave,companyName: string,slaveType: string) => {
     return {
         nodeMaster,
         isMultilevel: true,
