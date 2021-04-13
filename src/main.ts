@@ -56,3 +56,13 @@ const nodeSlaves = (nodeMaster: object,userData: object,companyName: string,slav
         ...userData
     }
 };
+
+console.log(hashMaker({
+    name: 'Adriano',
+    birthDate: new Date(),
+    userType: 'B2C',
+    email: 'adriano@email.com',
+    company: 'technoizz',
+    companyRole: 'Fullstack dev',
+    userToken: Buffer.from('').toString('hex')
+}));
