@@ -5,7 +5,7 @@ interface ICompanyRules{
     amount: number
 };
 
-const generateRules = (rulesList: ICompanyRules) => {
+const generateRules = (rulesList: ICompanyRules):ICompanyRules => {
     return{
         ...rulesList
     };
@@ -14,6 +14,12 @@ const generateRules = (rulesList: ICompanyRules) => {
 const hashMaker = (dataToHash: object):string => {    
     let stringBuffer = Buffer.from(JSON.stringify(dataToHash)).toString('base64');   
     return stringBuffer;
+};
+
+const hashDecryptor = (dataToDecrypt: string): object => {
+    let decryptedData = Buffer.from(dataToDecrypt,'base64').toString('utf-8');
+    let parsedData = JSON.parse(decryptedData);
+    return parsedData;
 };
 
 interface INodeMaster{
@@ -57,7 +63,7 @@ const nodeSlaves = (nodeMaster: object,userData: object,companyName: string,slav
     }
 };
 
-console.log(hashMaker({
+const hashedData = hashMaker({
     name: 'Adriano',
     birthDate: new Date(),
     userType: 'B2C',
@@ -65,4 +71,9 @@ console.log(hashMaker({
     company: 'technoizz',
     companyRole: 'Fullstack dev',
     userToken: Buffer.from('').toString('hex')
-}));
+});
+
+const decrypted = hashDecryptor(hashedData);
+
+console.log(hashedData);
+console.log(decrypted);

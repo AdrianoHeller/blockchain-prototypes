@@ -18,6 +18,11 @@ var hashMaker = function (dataToHash) {
     var stringBuffer = Buffer.from(JSON.stringify(dataToHash)).toString('base64');
     return stringBuffer;
 };
+var hashDecryptor = function (dataToDecrypt) {
+    var decryptedData = Buffer.from(dataToDecrypt, 'base64').toString('utf-8');
+    var parsedData = JSON.parse(decryptedData);
+    return parsedData;
+};
 ;
 var nodeMaster = function (userData, isMultilevel, multiLevelRules) {
     return __assign(__assign(__assign(__assign({}, userData), { isMultilevel: isMultilevel }), multiLevelRules), { nodeSlaves: [] });
@@ -27,7 +32,7 @@ var nodeSlaves = function (nodeMaster, userData, companyName, slaveType) {
     return __assign({ nodeMaster: nodeMaster, isMultilevel: true, companyName: companyName,
         slaveType: slaveType }, userData);
 };
-console.log(hashMaker({
+var hashedData = hashMaker({
     name: 'Adriano',
     birthDate: new Date(),
     userType: 'B2C',
@@ -35,4 +40,7 @@ console.log(hashMaker({
     company: 'technoizz',
     companyRole: 'Fullstack dev',
     userToken: Buffer.from('').toString('hex')
-}));
+});
+var decrypted = hashDecryptor(hashedData);
+console.log(hashedData);
+console.log(decrypted);
