@@ -1,5 +1,14 @@
-const companyRules: object = {
-    
+interface ICompanyRules{
+    numberOfLevels: number,
+    maxDepth: number,
+    amountPercentage: number,
+    amount: number
+};
+
+const generateRules = (rulesList: ICompanyRules) => {
+    return{
+        ...rulesList
+    };
 };
 
 const hashMaker = (dataToHash: object):string => {    
@@ -7,7 +16,17 @@ const hashMaker = (dataToHash: object):string => {
     return stringBuffer;
 };
 
-const nodeMaster = (userData:object,isMultilevel:boolean,multiLevelRules: object) => {
+interface INodeMaster{
+    name: string,
+    birthDate: Date,
+    userType: string,
+    email: string,
+    company: string,
+    companyRole: string,
+    userToken: string
+};
+
+const nodeMaster = (userData: INodeMaster,isMultilevel: boolean,multiLevelRules: object) => {
     return {
         ...userData,
         isMultilevel,
@@ -16,7 +35,19 @@ const nodeMaster = (userData:object,isMultilevel:boolean,multiLevelRules: object
     };
 };
 
-const nodeSlaves = (nodeMaster: object,userData:object,companyName: string,slaveType: string) => {
+interface INodeSlave{
+    name: string,
+    birthDate: Date,
+    userType: string,
+    email: string,
+    company: string,
+    companyRole: string,
+    userToken: string,
+    hasMaster: boolean,
+    masterToken: string
+};
+
+const nodeSlaves = (nodeMaster: object,userData: object,companyName: string,slaveType: string) => {
     return {
         nodeMaster,
         isMultilevel: true,
