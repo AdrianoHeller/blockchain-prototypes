@@ -12,13 +12,15 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
-    function User(name, address, email, complement, neighborhood, birthDate) {
+    function User(name, address, email, complement, neighborhood, birthDate, hasCompany) {
+        this._id = Buffer.from(name).toString('hex');
         this.name = name;
         this.address = address;
         this.email = email;
         this.complement = complement;
         this.neighborhood = neighborhood;
         this.birthDate = birthDate;
+        this.hasCompany = hasCompany;
     }
     ;
     User.prototype.user = function () {
