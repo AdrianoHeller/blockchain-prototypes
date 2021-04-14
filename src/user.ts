@@ -1,5 +1,5 @@
 class User{
-    _id: string;
+    protected _id: string;
     name: string;
     address: string;
     complement: string;
@@ -19,10 +19,9 @@ class User{
         this.hasCompany = hasCompany;
     };
 
-    user(){
-        return{
-            ...this
-        }
+    get(){
+        const _user = {...this};
+        return _user;
     };
 };
 
